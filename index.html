@@ -10,6 +10,7 @@
         .hidden { display: none !important; }
         .tab-active { border-bottom: 2px solid #2563eb; color: #2563eb; font-weight: bold; }
         .tab-inactive { color: #6b7280; cursor: pointer; }
+        .gradient-bg { background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%); }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -17,8 +18,6 @@
     <!-- شاشة المصادقة -->
     <div id="auth-view" class="min-h-screen flex items-center justify-center bg-blue-50 p-4">
         <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md border-t-4 border-blue-600">
-            
-            <!-- اللوجو في صفحة الدخول -->
             <div class="flex flex-col items-center mb-6">
                 <div class="bg-blue-600 p-4 rounded-full shadow-lg mb-3 transform hover:scale-105 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12 text-yellow-400">
@@ -29,13 +28,10 @@
                 <h2 class="text-2xl font-black text-gray-800 tracking-wider" dir="ltr">Crypto Masters</h2>
                 <p id="auth-subtitle" class="text-sm text-gray-500 mt-1 font-semibold">تسجيل الدخول إلى حسابك</p>
             </div>
-
-            <!-- أزرار التبديل -->
             <div class="flex justify-around mb-6 border-b pb-2">
                 <div id="tab-login" onclick="switchTab('login')" class="tab-active pb-1">تسجيل الدخول</div>
                 <div id="tab-register" onclick="switchTab('register')" class="tab-inactive pb-1">إنشاء حساب</div>
             </div>
-            
             <form onsubmit="handleAuth(event)">
                 <div id="register-fields" class="hidden">
                     <div class="mb-4">
@@ -43,22 +39,18 @@
                         <input type="text" id="username" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
                     </div>
                 </div>
-
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2">البريد الإلكتروني</label>
                     <input type="email" id="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-left focus:ring-2 focus:ring-blue-500 outline-none" dir="ltr">
                 </div>
-                
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2">كلمة المرور</label>
                     <input type="password" id="password" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-left focus:ring-2 focus:ring-blue-500 outline-none" dir="ltr">
                 </div>
-
                 <div id="confirm-password-field" class="hidden mb-6">
                     <label class="block text-gray-700 text-sm font-bold mb-2">تأكيد كلمة المرور</label>
                     <input type="password" id="confirm-password" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-left focus:ring-2 focus:ring-blue-500 outline-none" dir="ltr">
                 </div>
-
                 <button type="submit" id="auth-btn" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition mt-2 shadow-lg">تسجيل الدخول</button>
             </form>
             <p id="auth-msg" class="text-sm mt-4 text-center hidden font-bold"></p>
@@ -68,8 +60,7 @@
     <!-- محتوى الموقع -->
     <div id="app-view" class="hidden min-h-screen flex flex-col">
         
-        <header class="bg-blue-700 text-white p-3 md:p-4 shadow-lg flex justify-between items-center sticky top-0 z-10">
-            <!-- اللوجو في الشريط العلوي -->
+        <header class="gradient-bg text-white p-3 md:p-4 shadow-lg flex justify-between items-center sticky top-0 z-10">
             <div class="flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7 md:w-9 md:h-9 text-yellow-400 drop-shadow">
                     <path d="M11.75 3a.75.75 0 0 1 .728.568l1.455 5.82 4.67-3.113a.75.75 0 0 1 1.134.823l-2.42 9.68a1.5 1.5 0 0 1-1.456 1.136H8.139a1.5 1.5 0 0 1-1.456-1.136l-2.42-9.68a.75.75 0 0 1 1.134-.823l4.67 3.113 1.455-5.82A.75.75 0 0 1 11.75 3Z" />
@@ -79,8 +70,8 @@
             </div>
             
             <div class="flex items-center gap-2">
-                <span id="user-name-display" class="text-xs md:text-sm bg-blue-500 px-2 md:px-3 py-1.5 rounded shadow-sm font-semibold"></span>
-                <button onclick="openSettingsModal()" class="text-xs md:text-sm bg-blue-800 hover:bg-blue-900 text-white px-2 md:px-3 py-1.5 rounded transition shadow-sm">
+                <span id="user-name-display" class="text-xs md:text-sm bg-blue-800 bg-opacity-50 px-3 py-1.5 rounded shadow-sm font-bold border border-blue-400"></span>
+                <button onclick="openSettingsModal()" class="text-xs md:text-sm bg-blue-900 bg-opacity-60 hover:bg-opacity-80 text-white px-3 py-1.5 rounded transition shadow-sm border border-blue-500">
                     ⚙️ <span class="hidden md:inline">الإعدادات</span>
                 </button>
             </div>
@@ -97,6 +88,17 @@
                 <button id="vote-btn" onclick="submitVote()" class="bg-green-500 text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-green-600 transition shadow-md w-full max-w-xs mx-auto">تأكيد التصويت</button>
             </div>
 
+            <!-- لوحة إجمالي الأرباح الجديدة -->
+            <div id="earnings-card" class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-xl shadow border border-green-200 mb-6 flex justify-between items-center hidden">
+                <div>
+                    <h3 class="text-green-800 font-bold text-lg">سجل المدفوعات الخاص بك</h3>
+                    <p class="text-green-600 text-sm font-semibold">إجمالي المكافآت التي تم دفعها لمحفظتك</p>
+                </div>
+                <div class="bg-white px-4 py-2 rounded-lg shadow-sm border border-green-300">
+                    <span id="total-earnings" class="text-2xl font-black text-green-600" dir="ltr">0 USDT</span>
+                </div>
+            </div>
+
             <!-- سجل المهمات والتفاصيل -->
             <div class="flex justify-between items-center mb-4 border-b-2 border-gray-200 pb-2">
                 <h2 class="text-xl font-bold text-gray-700">سجل المهمات</h2>
@@ -107,26 +109,19 @@
         </main>
     </div>
 
-    <!-- قائمة الإعدادات -->
+    <!-- باقي النوافذ المنبثقة لم تتغير -->
     <div id="settings-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50">
         <div class="bg-white p-6 rounded-lg max-w-sm w-full shadow-2xl">
             <h3 class="text-xl font-bold mb-6 text-center text-blue-700 border-b pb-2">إعدادات الحساب</h3>
             <div class="flex flex-col gap-3">
-                <button onclick="openChangePasswordModal()" class="w-full text-right p-3 border border-gray-200 rounded-lg hover:bg-gray-50 font-semibold flex items-center gap-2 transition">
-                    <span>🔑</span> تغيير كلمة المرور
-                </button>
-                <button onclick="openDefaultWalletModal()" class="w-full text-right p-3 border border-gray-200 rounded-lg hover:bg-gray-50 font-semibold flex items-center gap-2 transition">
-                    <span>💳</span> تغيير محفظة السحب
-                </button>
-                <button onclick="logout()" class="w-full text-right p-3 border border-red-200 rounded-lg hover:bg-red-50 text-red-600 font-semibold flex items-center gap-2 transition">
-                    <span>🚪</span> تسجيل الخروج
-                </button>
+                <button onclick="openChangePasswordModal()" class="w-full text-right p-3 border border-gray-200 rounded-lg hover:bg-gray-50 font-semibold flex items-center gap-2 transition"><span>🔑</span> تغيير كلمة المرور</button>
+                <button onclick="openDefaultWalletModal()" class="w-full text-right p-3 border border-gray-200 rounded-lg hover:bg-gray-50 font-semibold flex items-center gap-2 transition"><span>💳</span> تغيير محفظة السحب</button>
+                <button onclick="logout()" class="w-full text-right p-3 border border-red-200 rounded-lg hover:bg-red-50 text-red-600 font-semibold flex items-center gap-2 transition"><span>🚪</span> تسجيل الخروج</button>
             </div>
             <button onclick="closeSettingsModal()" class="mt-6 w-full p-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 font-bold transition">إغلاق</button>
         </div>
     </div>
 
-    <!-- نافذة إضافة محفظة السحب الافتراضية -->
     <div id="default-wallet-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50">
         <div class="bg-white p-6 rounded-lg max-w-md w-full shadow-2xl">
             <h3 class="text-xl font-bold mb-2 text-center text-blue-700">محفظة السحب الافتراضية</h3>
@@ -142,7 +137,6 @@
         </div>
     </div>
 
-    <!-- نافذة إضافة عنوان المحفظة للمهمة -->
     <div id="wallet-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50">
         <div class="bg-white p-6 rounded-xl max-w-md w-full shadow-2xl border-t-4 border-green-500">
             <h3 class="text-2xl font-bold mb-2 text-center text-green-600">🎉 المهمة ناجحة</h3>
@@ -158,7 +152,6 @@
         </div>
     </div>
 
-    <!-- نافذة تغيير كلمة المرور -->
     <div id="change-password-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50">
         <div class="bg-white p-6 rounded-lg max-w-md w-full shadow-2xl">
             <h3 class="text-xl font-bold mb-6 text-center text-blue-700">تغيير كلمة المرور</h3>
@@ -181,7 +174,7 @@
         // ============================================
         // 🚨 ضع رابط Google Script الخاص بك هنا 🚨
         // ============================================
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyYFmDrjxTh4ZiRvVnqtV6A1H2wXjtZ9WvJlB62t_LXo3uLFcpwJpVUUF3fPSw7b_1j/exec";
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMhamyW7zADZxKe-_ojd6BY0PUIkRo1tAltHnwEOLgzSTIXqDC3hZ0NnpIl8d2E9BR/exec";
         
         let currentAuthMode = 'login'; 
         let currentRowToUpdate = null;
@@ -274,21 +267,9 @@
             } catch (error) { showAuthError("حدث خطأ في الاتصال."); }
         }
 
-        // --- دوال قائمة الإعدادات ---
         function openSettingsModal() { document.getElementById('settings-modal').classList.remove('hidden'); }
         function closeSettingsModal() { document.getElementById('settings-modal').classList.add('hidden'); }
-
-        function logout() {
-            window.userEmail = null;
-            window.currentPassword = null;
-            window.defaultPlatform = null;
-            window.defaultWallet = null;
-            document.getElementById('app-view').classList.add('hidden');
-            document.getElementById('auth-view').classList.remove('hidden');
-            document.getElementById('tasks-container').innerHTML = '';
-            document.getElementById('password').value = '';
-            closeSettingsModal();
-        }
+        function logout() { location.reload(); }
 
         function openDefaultWalletModal() {
             closeSettingsModal();
@@ -310,12 +291,7 @@
                 window.defaultPlatform = platform;
                 window.defaultWallet = wallet;
                 closeDefaultWalletModal();
-            } catch(e) {
-                alert("تم الحفظ!");
-                window.defaultPlatform = platform;
-                window.defaultWallet = wallet;
-                closeDefaultWalletModal();
-            }
+            } catch(e) { closeDefaultWalletModal(); }
             btn.innerText = "حفظ المحفظة"; btn.disabled = false;
         }
 
@@ -368,23 +344,45 @@
             btn.innerText = "تأكيد التصويت"; btn.disabled = false;
         }
 
+        // التعديل الرئيسي في دالة جلب المهمات لعرض المكافآت والأرباح
         async function fetchTasks() {
             const container = document.getElementById('tasks-container');
+            const earningsCard = document.getElementById('earnings-card');
+            const totalEarningsLabel = document.getElementById('total-earnings');
+            
             container.innerHTML = '<p class="text-center text-gray-500 mt-6">جاري التحديث...</p>';
             try {
                 const response = await fetch(`${SCRIPT_URL}?action=getTasks&email=${encodeURIComponent(window.userEmail)}`);
                 const tasks = await response.json();
-                if(tasks.length === 0) { container.innerHTML = "<div class='text-center mt-6 bg-white p-6 rounded-lg shadow border border-gray-100'><p class='text-gray-500'>لا يوجد لديك مهمات بعد، ابدأ بالتصويت لدعم فريقك!</p></div>"; return; }
+                
+                if(tasks.length === 0) { 
+                    container.innerHTML = "<div class='text-center mt-6 bg-white p-6 rounded-lg shadow border border-gray-100'><p class='text-gray-500'>لا يوجد لديك مهمات بعد، ابدأ بالتصويت لدعم فريقك!</p></div>"; 
+                    earningsCard.classList.add('hidden');
+                    return; 
+                }
                 
                 let html = "";
                 let autoOpenRow = null; 
+                let hasPaidTasks = false;
+                
+                // يمكنك استبدال هذا بأي كود برمجي لجمع الأرقام، حالياً سنترك الحساب لكتابتك النصية (مثلاً: 5 USDT) أو نجمعها إذا كانت أرقاماً صافية.
+                // سنكتفي الآن بعرض القسم إذا كان هناك مدفوعات، ويمكنك جمعها يدوياً إذا كانت نصوص مختلفة.
 
                 tasks.forEach(task => {
                     let statusColor = "bg-yellow-100 text-yellow-800 border-yellow-200";
                     let icon = "⏳";
+                    
                     if(task.status === "ناجحة") { statusColor = "bg-green-100 text-green-800 border-green-200"; icon = "✅"; }
                     if(task.status === "قيد الدفع") { statusColor = "bg-blue-100 text-blue-800 border-blue-200"; icon = "💸"; }
                     if(task.status === "ملغية") { statusColor = "bg-red-100 text-red-800 border-red-200"; icon = "❌"; }
+                    
+                    // الحالة الجديدة (مدفوعة)
+                    if(task.status === "مدفوعة") { 
+                        statusColor = "bg-emerald-600 text-white border-emerald-700 shadow-md"; 
+                        icon = "🎉"; 
+                        hasPaidTasks = true;
+                    }
+
                     const dateStr = new Date(task.date).toLocaleDateString();
                     
                     html += `<div class="bg-white p-4 rounded-xl flex flex-col md:flex-row justify-between items-center border border-gray-200 shadow-sm mb-3 hover:shadow-md transition">
@@ -393,17 +391,39 @@
                             <p class="text-xs text-gray-500 mt-1">تاريخ الطلب: <span dir="ltr" class="font-semibold">${dateStr}</span></p>
                         </div>
                         <div class="flex flex-col items-center md:items-end gap-2">
-                            <span class="px-4 py-1.5 rounded-full text-sm font-bold border ${statusColor} shadow-sm">${icon} ${task.status}</span>`;
+                            <span class="px-4 py-1.5 rounded-full text-sm font-bold border ${statusColor}">${icon} ${task.status}</span>`;
                     
                     if(task.status === "ناجحة" && (task.wallet === "-" || task.wallet === "")) {
                         html += `<button onclick="openWalletModal(${task.row})" class="mt-2 text-sm bg-green-500 text-white px-4 py-2 rounded-lg font-bold animate-bounce shadow-md hover:bg-green-600">أضف محفظتك للسحب 💰</button>`;
                         if (autoOpenRow === null) autoOpenRow = task.row;
-                    } else if (task.wallet !== "-" && task.wallet !== "") {
+                    } 
+                    else if (task.status === "مدفوعة" && task.reward) {
+                        // إظهار المكافأة
+                        html += `<p class="text-sm font-black text-emerald-600 mt-1 bg-emerald-50 px-3 py-1 rounded-lg border border-emerald-200" dir="ltr">+ ${task.reward}</p>`;
+                    }
+                    else if (task.wallet !== "-" && task.wallet !== "") {
                         html += `<p class="text-xs text-gray-400 mt-1" dir="ltr"><span class="bg-gray-100 px-2 py-1 rounded">${task.wallet.substring(0,8)}...</span></p>`;
                     }
+                    
                     html += `</div></div>`;
                 });
+                
                 container.innerHTML = html;
+
+                if (hasPaidTasks) {
+                    earningsCard.classList.remove('hidden');
+                    // فكرة لجمع المكافآت إذا كنت تكتبها أرقاماً فقط (مثلاً 5 بدلاً من 5 USDT)
+                    let total = 0;
+                    tasks.forEach(t => { 
+                        if(t.status === "مدفوعة" && t.reward) {
+                            let num = parseFloat(t.reward.toString().replace(/[^0-9.]/g, ''));
+                            if(!isNaN(num)) total += num;
+                        }
+                    });
+                    totalEarningsLabel.innerText = total > 0 ? `${total} USDT` : "الرجاء التحقق";
+                } else {
+                    earningsCard.classList.add('hidden');
+                }
 
                 if (autoOpenRow !== null) openWalletModal(autoOpenRow);
 
